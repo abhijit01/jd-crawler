@@ -32,8 +32,8 @@ public class JDCrawler {
 	private static Set<String> docIdSet = new LinkedHashSet<String>();
 	private static String primaryUrl = "https://www.justdial.com/";
 	private static String baseUrl = "https://www.justdial.com/Pune/Stationery-Shops/nct-1764/page-";
-	private static Set<String> paginationUrlSetByCity = new LinkedHashSet<String>();
-	private static Map<String, String> mainUrlMapByCity = new TreeMap<String, String>();
+	private static Set<String> paginationUrlSetByLocality = new LinkedHashSet<String>();
+	private static Map<String, Set<String>> localityUrlMapByCity = new TreeMap<String, Set<String>>();
 	private static Set<StationeryShop> shopsByCity = new LinkedHashSet<StationeryShop>();
 	private static Set<String> shopsUrlSetByCity = new LinkedHashSet<String>();
 	private static Map<String, Set<String>> urlMapByCity = new TreeMap<String, Set<String>>();
@@ -47,19 +47,19 @@ public class JDCrawler {
 	 * Get all the docIds for a particular URL. Doc Ids are needed to hit the JD
 	 * Api to get the co-ordinates
 	 */
-	public static void getAllDocIDsInPage(String url) throws IOException {
-		Document idDoc = Jsoup.connect(url).get();
-
-		Elements docElements = idDoc.select("span[Docid]");
-		for (Element element : docElements) {
-			for (Attribute attr : element.attributes()) {
-				if (attr.getKey().contentEquals("docid")) {
-					docIdSet.add(attr.getValue());
-					System.out.println(attr.getValue());
+	public static void getAllDocIDsInPage(Set<String> paginationUrlSetByLocality) throws IOException {
+		for(String url : paginationUrlSetByLocality) {
+			Document idDoc = Jsoup.connect(url).get();
+			Elements docElements = idDoc.select("span[Docid]");
+			for (Element element : docElements) {
+				for (Attribute attr : element.attributes()) {
+					if (attr.getKey().contentEquals("docid")) {
+						docIdSet.add(attr.getValue());
+						System.out.println(attr.getValue());
+					}
 				}
 			}
 		}
-
 	}
 
 	// Get all the localities for a particular city
@@ -76,25 +76,37 @@ public class JDCrawler {
 					localitiesSet.add(locality);
 			}
 		}
-		System.out.println(localitiesSet);
+		//System.out.println(localitiesSet);
 		localitiesMapByCity.put(city, localitiesSet);
 	}
 
-	//
-	public static void prepareUrlsForCities(String primaryUrl) {
+	
+	public static void prepareUrlsForLocalities(String primaryUrl) {
 		for (City city : City.values()) {
-			StringBuilder cityUrlBuilder = new StringBuilder();
-			cityUrlBuilder.append(primaryUrl).append(city).append("/Stationery-Shops/nct-1764/page-");
-			mainUrlMapByCity.put(city.toString(), cityUrlBuilder.toString());
+			Set<String> localityUrlSet = new TreeSet<String>();
+			Set<String> localities = localitiesMapByCity.get(city.toString());
+			for(String locality : localities) {
+				StringBuilder localityUrlBuilder = new StringBuilder();
+				localityUrlBuilder.append(primaryUrl).append(city).append("/Stationery-Shops-in-");
+				localityUrlBuilder.append(locality.replaceAll(" ", "-"));
+				localityUrlBuilder.append("/nct-409104/page-");
+				localityUrlSet.add(localityUrlBuilder.toString());
+			}
+			//System.out.println(localityUrlSet);
+			localityUrlMapByCity.put(city.toString(), localityUrlSet);
 		}
 	}
 
-	public static void preparePaginationUrlsCityWise(String baseUrl) {
-		for (int i = 1; i <= 50; i++) {
-			StringBuilder urlBuilder = new StringBuilder();
-			urlBuilder.append(baseUrl).append(i);
-			paginationUrlSetByCity.add(urlBuilder.toString());
+	public static void preparePaginationUrlsLocalityWise(String baseUrl, String city) {
+		Set<String> localitiesUrlSet = localityUrlMapByCity.get(city.toString());
+		for(String localityUrl : localitiesUrlSet) {
+			for (int i = 1; i <= 50; i++) {
+				StringBuilder pagionationUrlBuilder = new StringBuilder();
+				pagionationUrlBuilder.append(localityUrl).append(i);
+				paginationUrlSetByLocality.add(pagionationUrlBuilder.toString());
+			}
 		}
+		//System.out.println(paginationUrlSetByLocality);
 	}
 
 	public static void prepareJsonUrlsForCity(String city, Set<String> docIdSet) {
@@ -104,7 +116,6 @@ public class JDCrawler {
 			// String city = "Pune";
 			String countryCode = "IN";
 			String StateCode = "NA"; // valid only for USA. In our case "NA".
-
 			String final_url = base_url + "/" + doc_id + "/" + countryCode + "/" + city + "/" + StateCode;
 			shopsUrlSetByCity.add(final_url);
 		}
@@ -178,7 +189,7 @@ public class JDCrawler {
 
 	public static void cleanUp() {
 		docIdSet = new LinkedHashSet<String>();
-		paginationUrlSetByCity = new LinkedHashSet<String>();
+		paginationUrlSetByLocality = new LinkedHashSet<String>();
 		shopsUrlSetByCity = new LinkedHashSet<String>();
 	}
 
@@ -203,6 +214,13 @@ public class JDCrawler {
 		 */
 
 		getAllLocalities("Hyderabad");
+		prepareUrlsForLocalities(primaryUrl);
+		preparePaginationUrlsLocalityWise(baseUrl, "Hyderabad");
+		getAllDocIDsInPage(paginationUrlSetByLocality);
+		prepareJsonUrlsForCity("Hyderabad", docIdSet);
+		getAllShopsInCity(shopsUrlSetByCity, "Hyderabad");
+		writeDataToCSV();
+		
 	}
 
 }
