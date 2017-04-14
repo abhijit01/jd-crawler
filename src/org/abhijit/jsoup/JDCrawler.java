@@ -49,7 +49,9 @@ public class JDCrawler {
 	 */
 	public static void getAllDocIDsInPage(Set<String> paginationUrlSetByLocality) throws IOException {
 		for(String url : paginationUrlSetByLocality) {
-			Document idDoc = Jsoup.connect(url).get();
+			Document idDoc = Jsoup.connect(url).
+								userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").
+								timeout(1000000).get();
 			Elements docElements = idDoc.select("span[Docid]");
 			for (Element element : docElements) {
 				for (Attribute attr : element.attributes()) {
@@ -66,7 +68,9 @@ public class JDCrawler {
 	public static void getAllLocalities(String city) throws IOException {
 		StringBuilder localityUrl = new StringBuilder("http://www.propertykhazana.com/localities/");
 		localityUrl.append(city.toLowerCase());
-		Document locDoc = Jsoup.connect(localityUrl.toString()).get();
+		Document locDoc = Jsoup.connect(localityUrl.toString()).
+							userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").
+							timeout(1000000).get();
 		Elements localityElements = locDoc.getElementsByAttributeValue("id", "localitylist");
 		Set<String> localitiesSet = new TreeSet<String>();
 		for (Element element : localityElements) {
