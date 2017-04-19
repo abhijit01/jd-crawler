@@ -34,7 +34,7 @@ public class JDCrawler {
 	private static String baseUrl = "https://www.justdial.com/Pune/Stationery-Shops/nct-1764/page-";
 	private static Set<String> paginationUrlSetByLocality = new LinkedHashSet<String>();
 	private static Map<String, Set<String>> localityUrlMapByCity = new TreeMap<String, Set<String>>();
-	private static Set<StationeryShop> shopsByCity = new LinkedHashSet<StationeryShop>();
+	private static Set<StationeryShop_Bkp> shopsByCity = new LinkedHashSet<StationeryShop_Bkp>();
 	private static Set<String> shopsUrlSetByCity = new LinkedHashSet<String>();
 	private static Map<String, Set<String>> urlMapByCity = new TreeMap<String, Set<String>>();
 	private static Map<String, Set<String>> localitiesMapByCity = new TreeMap<String, Set<String>>();
@@ -50,6 +50,7 @@ public class JDCrawler {
 	public static void getAllDocIDsInPage(Set<String> paginationUrlSetByLocality) throws IOException {
 		for(String url : paginationUrlSetByLocality) {
 			Document idDoc = Jsoup.connect(url).
+								ignoreHttpErrors(true).
 								userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").
 								timeout(1000000).get();
 			Elements docElements = idDoc.select("span[Docid]");
@@ -69,6 +70,7 @@ public class JDCrawler {
 		StringBuilder localityUrl = new StringBuilder("http://www.propertykhazana.com/localities/");
 		localityUrl.append(city.toLowerCase());
 		Document locDoc = Jsoup.connect(localityUrl.toString()).
+							ignoreHttpErrors(true).
 							userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").
 							timeout(1000000).get();
 		Elements localityElements = locDoc.getElementsByAttributeValue("id", "localitylist");
@@ -129,7 +131,7 @@ public class JDCrawler {
 		for (String url : shopsUrlSetByCity) {
 			JSONObject newJsonObject = readJsonFromUrl(url);
 			// System.out.println(newObject.getJSONObject("results").get("name"));
-			StationeryShop newShop = new StationeryShop();
+			StationeryShop_Bkp newShop = new StationeryShop_Bkp();
 			newShop.setName(newJsonObject.getJSONObject("results").getString("name"));
 			newShop.setContact(newJsonObject.getJSONObject("results").getString("contact"));
 			newShop.setComplat(newJsonObject.getJSONObject("results").getString("complat"));
@@ -172,7 +174,7 @@ public class JDCrawler {
 		CSVUtils.writeLine(writer,
 				Arrays.asList("Name", "Contact", "Lattitude", "Longitude", "Landmark", "Address", "City"));
 
-		for (StationeryShop shop : shopsByCity) {
+		for (StationeryShop_Bkp shop : shopsByCity) {
 			List<String> list = new ArrayList<String>();
 			list.add(shop.getName().replaceAll(",", ";"));
 			list.add(shop.getContact().replaceAll(",", ";"));

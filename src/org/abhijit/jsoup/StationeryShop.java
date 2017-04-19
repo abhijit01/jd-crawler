@@ -1,83 +1,59 @@
 package org.abhijit.jsoup;
 
-
 public class StationeryShop {
 
-		private String name;
+	private String name;
 
-	    private String contact;
-	    
-	    private String complat;
+    private String contact;
+    
+    private String address;
+    
+    private String city ;
+    
+    private String rating ;
 
-	    private String complong;
+	public String getName() {
+		return name;
+	}
 
-	    private String landmark;
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	    private String address;
-	    
-	    private String city ;
+	public String getContact() {
+		return contact;
+	}
 
-	    public String getName() {
-			return name;
-		}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	public String getAddress() {
+		return address;
+	}
 
-		public String getContact() {
-			return contact;
-		}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-		public void setContact(String contact) {
-			this.contact = contact;
-		}
+	public String getCity() {
+		return city;
+	}
 
-		public String getComplat() {
-			return complat;
-		}
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-		public void setComplat(String complat) {
-			this.complat = complat;
-		}
+	public String getRating() {
+		return rating;
+	}
 
-		public String getComplong() {
-			return complong;
-		}
-
-		public void setComplong(String complong) {
-			this.complong = complong;
-		}
-
-		public String getLandmark() {
-			return landmark;
-		}
-
-		public void setLandmark(String landmark) {
-			this.landmark = landmark;
-		}
-
-		public String getAddress() {
-			return address;
-		}
-
-		public void setAddress(String address) {
-			this.address = address;
-		}
-
-		public String getCity() {
-			return city;
-		}
-
-		public void setCity(String city) {
-			this.city = city;
-		}
-
-		@Override
-	    public String toString()
-	    {
-	        return "Stationery Shop :  [Name : " + name + "\nContact : " + contact + "\nLattitude : " + complat 
-	        		+"\nLongitude : "+ complong + "\nLandmark : " + landmark + "\nAddress : " + address + "\nCity : " + city +" ]";
-	    }
-			
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+    
+    public String toString() {
+    	return "Stationery Shop :  [Name : " + name + "\nContact : " + contact  
+    			+ "\nAddress : " + address + "\nCity : " + city + "\nRating : " + rating + " ]";
+    }
 }
