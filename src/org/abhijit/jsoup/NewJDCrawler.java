@@ -86,7 +86,7 @@ public class NewJDCrawler {
 	public static void prepareShopUrls(Set<String> paginationUrlSetByLocality) throws IOException {
 		PrintWriter writer = new PrintWriter("shop_url.txt", "UTF-8");
 		for(String url : paginationUrlSetByLocality) {
-			System.setProperty("http.proxyHost", "47.90.63.202");
+			System.setProperty("http.proxyHost", "17");
 			System.setProperty("http.proxyPort", "8080");
 			Document shopUrlData = Jsoup.connect(url).ignoreHttpErrors(true)
 						.userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
@@ -97,11 +97,10 @@ public class NewJDCrawler {
 				System.out.println(element.child(0).attr("href"));
 				shopsUrlSetByCity.add(element.child(0).attr("href"));		
 				writer.println(element.child(0).attr("href"));
-				writer.close();
-				
 			}
 		}
 		System.out.println(shopsUrlSetByCity);
+		writer.close();
 	}
 
 	//Get all the shops in the city 
