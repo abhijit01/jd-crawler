@@ -33,7 +33,6 @@ public class JDShopCrawler {
 	private static Set<StationeryShop> shopsByLocality = new HashSet<StationeryShop>();
 	private static ExcelUtility excelUtility;
 	private static Workbook workBook;
-	private static BufferedReader in ;
 	/*static {
 		try {
 			excelUtility = new ExcelUtility();
@@ -46,7 +45,7 @@ public class JDShopCrawler {
 	// This function will read all the localities from loclaities.txt file
 	public static void readLocality(String fileName) throws InterruptedException, InvalidFormatException {
 		try {
-			in = new BufferedReader(new FileReader(fileName));
+			BufferedReader in = new BufferedReader(new FileReader(fileName));
 			String locality;
 			while ((locality = in.readLine()) != null) {
 				if (!locality.trim().isEmpty()) {
@@ -200,14 +199,12 @@ public class JDShopCrawler {
 
 			// Delete the original file
 			if (!inFile.delete()) {
-				in.close();
 				System.out.println("Could not delete file");
 				return;
 			}
 
 			// Rename the new file to the filename the original file had.
 			if (!tempFile.renameTo(inFile))
-				in.close();
 				System.out.println("Could not rename file");
 
 		} catch (FileNotFoundException ex) {
