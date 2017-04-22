@@ -10,6 +10,8 @@ public class StationeryShop {
     
     private String city ;
     
+    private String locality ;
+    
     private String rating ;
 
 	public String getName() {
@@ -42,6 +44,14 @@ public class StationeryShop {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getLocality() {
+		return locality;
+	}
+
+	public void setLocality(String locality) {
+		this.locality = locality;
 	}
 
 	public String getRating() {

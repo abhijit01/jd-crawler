@@ -16,7 +16,7 @@ public class LocalityAggregator {
 	public enum City {
 		Mumbai
 	};
-	
+
 	public static void getAllLocalities(String city) throws IOException {
 		PrintWriter writer = new PrintWriter("localities.txt", "UTF-8");
 		StringBuilder localityUrl = new StringBuilder("http://www.propertykhazana.com/localities/");
@@ -29,18 +29,19 @@ public class LocalityAggregator {
 		for (Element element : localityElements) {
 			for (Node data : element.childNodes()) {
 				String locality = data.toString().replaceAll("\\<.*?>", "").trim();
-				if (!locality.isEmpty() && !"".equals(locality))
+				if (!locality.isEmpty() || !"".equals(locality)) {
 					localitiesSet.add(locality);
-				writer.println(locality);
+					writer.println(locality);
+				}
 			}
 		}
 		writer.close();
 	}
-	
+
 	public static void main(String[] args) throws IOException {
-		
-		for(City city : City.values()) {
+		for (City city : City.values()) {
 			getAllLocalities(city.toString());
+			System.out.println("Fetched all the localities for " + city);
 		}
 	}
 }
