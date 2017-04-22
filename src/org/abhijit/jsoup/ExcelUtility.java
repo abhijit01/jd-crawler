@@ -86,4 +86,8 @@ public class ExcelUtility {
 	public Sheet getSheet(String sheetName) {
 		return workbook.getSheet("StationeryShop");
 	}
+	
+	public static void main(String[] args) throws IOException {
+		createWorkBook();
+	}
 }

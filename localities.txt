@@ -1,1 +1,157 @@
+Mira Road
+Chembur
+Andheri West
+Kharghar
+Malad West
+Andheri East
+Bandra West
+Goregaon West
+Kandivali East
+Ghodbunder Road
+Navi Mumbai
+Bhandup West
+Borivali West
+Panvel
 Khar East
+Kandivali West
+Goregaon East
+90 Feet Road
+Nelson Manickam Road
+Abdul Rehman Street
+Agripada
+Airoli
+Airoli Sector 4
+Airoli Sector 8
+Altamount Road
+Ambarnath
+Ambarnath East
+Ambernath West
+Amboli
+Andheri Kurla Road
+Andheri Sahar Road
+Antop Hill
+Apollo Bunder
+August Kranti Maidan
+Babulnath Road
+Badlapur
+Ballard Estate
+Bandra East
+Belapur
+Bhandup
+Bhandup East
+Bhayandar
+Bhayandar East
+Bhayandar Wada
+Bhayandar West
+Bhayander
+Bhayander East
+Bhayander West
+Bhindi Bazaar
+Bhiwandi
+Bhiwandi
+Bhoiwada
+Bhulabhai Desai Road
+Bhuleshwar
+Bhyandar East
+Boisar
+Boisar West
+Borivali
+Borivali East
+Breach Candy
+Byculla
+Byculla East
+Byculla West
+CP Tank
+Chhatrapati Shivaji Terminus
+Carnac Bunder
+CBD Belapur
+CBD Belapur Sector 11
+Chakala
+Chandivali
+Charkop
+Charni Road
+Charni Road East
+Chembur Camp
+Chembur Colony
+Chembur East
+Chembur West
+Chinch Bandar
+Chinch Bunder
+Chinchpokli
+Chinchpokli East
+Chinchpokli West
+Chira Bazaar
+Chowpatti
+Chuna Bhatti
+Churchgate
+Colaba Causeway
+Cotton Green
+Cotton Green West
+Crawford Market
+Cuffe Parade
+Cumbala Hill
+Currey Road
+Dadabhai Naoroji Road
+Dadar East
+Dadar T T
+Dadar West
+Dahisar
+Dahisar East
+Dahisar West
+Dana Bunder
+Delisle Road
+Deonar
+Deonar East
+Dharavi
+Dhobhi Talao
+Dhobi Talao
+Dockyard
+Dombivali
+Dombivali East
+Dombivali West
+Dongri
+Elphinstone Road
+Flora Fountain
+Fort
+Gamdevi
+Ghansoli
+Ghatkopar
+Ghatkopar East
+Ghatkopar West
+Ghodbandar Road
+Girgaon
+Girgaon Chowpatty
+Girgaum
+Goregaon East
+Goregaon West
+Govandi
+Govandi East
+Govandi West
+Gowalia Tank
+Grant Road
+Grant Road East
+Grant Road West
+Green Park Extension
+Gulalwadi
+Haji Ali
+Horiman Circle
+Hughes Road
+Hutatma Chowk
+J B Nagar
+Jacob Circle
+Jogeshwari
+Jogeshwari East
+Jogeshwari West
+Juhu Scheme
+Juhu Tara Road
+Kalachowki
+Kala Ghoda
+Kalamboli
+Kalbadevi
+Kalina
+Kalwa
+Kalwa West
+Kalyan
+Kalyan East
+Kalyan West
+Kamothe

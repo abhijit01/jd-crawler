@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -34,7 +33,7 @@ public class JDShopCrawler {
 	private static Set<StationeryShop> shopsByLocality = new HashSet<StationeryShop>();
 	private static ExcelUtility excelUtility;
 	private static Workbook workBook;
-
+	private static BufferedReader in ;
 	/*static {
 		try {
 			excelUtility = new ExcelUtility();
@@ -47,7 +46,7 @@ public class JDShopCrawler {
 	// This function will read all the localities from loclaities.txt file
 	public static void readLocality(String fileName) throws InterruptedException, InvalidFormatException {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(fileName));
+			in = new BufferedReader(new FileReader(fileName));
 			String locality;
 			while ((locality = in.readLine()) != null) {
 				if (!locality.trim().isEmpty()) {
@@ -171,7 +170,7 @@ public class JDShopCrawler {
 
 	public static void deleteLocality(String fileName, String lineToRemove) {
 		try {
-
+			
 			File inFile = new File(fileName);
 
 			if (!inFile.isFile()) {
@@ -201,12 +200,14 @@ public class JDShopCrawler {
 
 			// Delete the original file
 			if (!inFile.delete()) {
+				in.close();
 				System.out.println("Could not delete file");
 				return;
 			}
 
 			// Rename the new file to the filename the original file had.
 			if (!tempFile.renameTo(inFile))
+				in.close();
 				System.out.println("Could not rename file");
 
 		} catch (FileNotFoundException ex) {
@@ -248,11 +249,7 @@ public class JDShopCrawler {
 	    workBook = WorkbookFactory.create(inputStream);
 	    Sheet mySheet = workBook.getSheetAt(0);
  
-	    Row row = mySheet.createRow(mySheet.getLastRowNum() + 1);
-	    row.createCell(0).setCellValue("abhijit");
-	    System.out.println("Done");
-         
-		/*for (StationeryShop shop : shopsByLocality) {
+		for (StationeryShop shop : shopsByLocality) {
 			Row row = mySheet.createRow(mySheet.getLastRowNum() + 1);
 			row.createCell(0).setCellValue(shop.getName().replaceAll(",", ";"));
 			row.createCell(1).setCellValue(shop.getContact().replaceAll(",", ";"));
@@ -264,13 +261,12 @@ public class JDShopCrawler {
 			} else {
 				row.createCell(5).setCellValue("0.0");
 			}
-		}*/
+		}
 	    
 	    inputStream.close();
 	    
         FileOutputStream outputStream = new FileOutputStream("Stationery_Mum.xls");
         workBook.write(outputStream);
-        //workBook.close();
         outputStream.close();
 	}
 
@@ -288,7 +284,7 @@ public class JDShopCrawler {
 		// getAllShopsInLocality("https://www.justdial.com/Mumbai/Stationery-Point-Opposite-Bharatiya-Misthan-Fort/022P1224784784C5Q6Y7_BZDET?xid=TXVtYmFpIFN0YXRpb25lcnkgU2hvcHMgTWFyaW5lIExpbmVz");
 		// deleteLocality("localities.txt", "Chembur");
 
-		// readLocality("localities.txt");
-		populateData();
+		readLocality("localities.txt");
+		//populateData();
 	}
 }
