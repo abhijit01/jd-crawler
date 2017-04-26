@@ -359,10 +359,8 @@ public class JDShopCrawler {
 		// populateData();
 		
 		int lineCount = countLines("localities.txt");
-		//while(lineCount > 0) {
+		while(lineCount > 0) {
 			readLocality("localities.txt", "Hyderabad");
-		//}
-		
-		
+		}
 	}
 }
