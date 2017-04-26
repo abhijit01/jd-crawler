@@ -137,7 +137,6 @@ public class JDShopCrawler {
 						.userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
 						.timeout(600000000).get();
 				
-				prepareShopAddress(shopData);
 
 				StationeryShop newShop = new StationeryShop();
 
