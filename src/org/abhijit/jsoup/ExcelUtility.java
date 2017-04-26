@@ -32,6 +32,8 @@ public class ExcelUtility {
 		shopColList.add("Locality");
 		shopColList.add("City");
 		shopColList.add("Rating");
+		shopColList.add("Latitude");
+		shopColList.add("Longitude");
 
 		Sheet sheet = createSheet("StationeryShop", shopColList);
 		sheet.setColumnWidth(0, 35 * 256);
@@ -40,8 +42,10 @@ public class ExcelUtility {
 		sheet.setColumnWidth(3, 10 * 256);
 		sheet.setColumnWidth(4, 10 * 256);
 		sheet.setColumnWidth(5, 10 * 256);
+		sheet.setColumnWidth(6, 15 * 256);
+		sheet.setColumnWidth(7, 15 * 256);
 		
-		File f = new File("Stationery_Mum.xls");
+		File f = new File("Stationery_Hyd.xls");
 		FileOutputStream out = null;
 		try {
 			out = new FileOutputStream(f);

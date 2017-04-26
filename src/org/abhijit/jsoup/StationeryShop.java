@@ -13,6 +13,10 @@ public class StationeryShop {
     private String locality ;
     
     private String rating ;
+    
+    private String latitude;
+    
+    private String longitude;
 
 	public String getName() {
 		return name;
@@ -62,8 +66,25 @@ public class StationeryShop {
 		this.rating = rating;
 	}
     
-    public String toString() {
+    public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String toString() {
     	return "Stationery Shop :  [Name : " + name + "\nContact : " + contact  
-    			+ "\nAddress : " + address + "\nCity : " + city + "\nRating : " + rating + " ]";
+    			+ "\nAddress : " + address + "\nCity : " + city + "\nRating : " + rating 
+    			+ "\nLatitude : " + latitude + "\nLongitude : " + longitude + "]";
     }
 }

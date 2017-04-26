@@ -1,5 +1,6 @@
 package org.abhijit.jsoup;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,13 +9,13 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -22,7 +23,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.jsoup.Connection.Response;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -35,25 +36,42 @@ public class JDShopCrawler {
 	private static Set<String> shopsUrlSetByLocality = new HashSet<String>();
 	private static Set<StationeryShop> shopsByLocality = new HashSet<StationeryShop>();
 	private static Workbook workBook;
-	// private static ExcelUtility excelUtility;
-
-	/*
-	 * static { try { excelUtility = new ExcelUtility(); } catch (IOException e)
-	 * { e.printStackTrace(); } }
-	 */
+	private static BufferedReader in;
+	
+	//Read the no of lines in a .txt file
+	public static int countLines(String filename) throws IOException {
+	    InputStream is = new BufferedInputStream(new FileInputStream(filename));
+	    try {
+	        byte[] c = new byte[1024];
+	        int count = 0;
+	        int readChars = 0;
+	        boolean empty = true;
+	        while ((readChars = is.read(c)) != -1) {
+	            empty = false;
+	            for (int i = 0; i < readChars; ++i) {
+	                if (c[i] == '\n') {
+	                    ++count;
+	                }
+	            }
+	        }
+	        return (count == 0 && !empty) ? 1 : count;
+	    } finally {
+	        is.close();
+	    }
+	}
 
 	// This function will read all the localities from loclaities.txt file
 	public static void readLocality(String fileName, String city) throws InterruptedException, InvalidFormatException {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(fileName));
-			String locality;
-			while ((locality = in.readLine()) != null) {
+			in = new BufferedReader(new FileReader(fileName));
+			String locality = in.readLine();
+			if (locality != null) {
 				if (!locality.trim().isEmpty()) {
 					System.out.println(locality);
 					processLocality(locality, city);
 				}
 			}
-			in.close();
+			// in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,14 +79,15 @@ public class JDShopCrawler {
 
 	public static void processLocality(String locality, String city)
 			throws IOException, InterruptedException, InvalidFormatException {
+		in.close();
 		String localityUrl = prepareMainUrlForLocality(primaryUrl, city, locality);
 		preparePaginationUrlsForLocality(localityUrl);
 		prepareShopUrls(paginationUrlSetByLocality);
 		getAllShopsInLocality(shopsUrlSetByLocality, locality);
 		// writeDataToCSV();
 		populateData();
-		cleanUp();
 		deleteLocality("localities.txt", locality);
+		cleanUp();
 	}
 
 	// prepare main url for a particular locality
@@ -114,79 +133,97 @@ public class JDShopCrawler {
 	// Get all the shops in the city
 	public static void getAllShopsInLocality(Set<String> shopUrlSetByLocality, String locality)
 			throws IOException, InterruptedException {
-		//Response response = null;
+		// Response response = null;
 		for (String url : shopUrlSetByLocality) {
 			// Thread.sleep(5000);
-			//Run this function using different proxies 
-			/*Set<String> proxySet = ConnectionUtility.getProxyList();
-			String randomIP = getRandomIP(proxySet);
-			System.setProperty("https.proxyHost", randomIP);
-			System.setProperty("https.proxyPort", "8080");
-			System.out.println("Using proxy : " + randomIP);
+			// Run this function using different proxies
+			/*
+			 * Set<String> proxySet = ConnectionUtility.getProxyList(); String
+			 * randomIP = getRandomIP(proxySet);
+			 * System.setProperty("https.proxyHost", randomIP);
+			 * System.setProperty("https.proxyPort", "8080");
+			 * System.out.println("Using proxy : " + randomIP);
+			 * 
+			 * try { response =
+			 * Jsoup.connect(url).followRedirects(false).timeout(1000000).
+			 * execute(); System.out.println(response.statusCode() + " : " +
+			 * response.url()); } catch (IOException e) { //e.printStackTrace();
+			 * continue; }
+			 * 
+			 * if (200 == response.statusCode()) {
+			 */
+			Document shopData = Jsoup.connect(url).ignoreHttpErrors(true)
+					.userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
+					.timeout(600000000).get();
 
+			StringBuilder addressBuilder = new StringBuilder();
+			StationeryShop newShop = new StationeryShop();
+
+			// Get the name of the shop
+			Elements nameElements = shopData.select("span[class=fn]");
+			for (Element element : nameElements) {
+				newShop.setName(element.ownText());
+				addressBuilder.append(element.ownText());
+				addressBuilder.append(" , ");
+				// System.out.println(" Name : " + element.ownText());
+			}
+
+			// Get all the contacts for a particular shop
+			Set<String> contacts = new HashSet<String>();
+			Elements telephoneNums = shopData.select("a[class=tel]");
+			for (Element telph : telephoneNums) {
+				// System.out.println(telph.ownText());
+				if (!telph.ownText().trim().isEmpty())
+					contacts.add(telph.ownText().replaceAll("\\<.*?>", "").trim());
+			}
+			StringBuilder contactBuilder = new StringBuilder();
+			for (String str : contacts)
+				contactBuilder.append(str).append(" ; ");
+			newShop.setContact(contactBuilder.toString());
+
+			// Get the address for a particular shop
+			Elements addressElements = shopData.select("span[class=jaddt]");
+			for (Element element : addressElements) {
+				newShop.setAddress(element.ownText());
+				// System.out.println(element.ownText());
+			}
+
+			// Get the rating for a particular shop
+			Elements ratingElements = shopData.select("span[class=value-titles]");
+			for (Element element : ratingElements) {
+				// System.out.println(element.ownText());
+				newShop.setRating(element.ownText());
+			}
+
+			// Get the city
+			Element city = shopData.getElementById("city");
+			System.out.println(city.val());
+			newShop.setCity(city.val());
+
+			newShop.setLocality(locality);
+
+			addressBuilder.append(getStreetAddress(shopData));
 			try {
-				response = Jsoup.connect(url).followRedirects(false).timeout(1000000).execute();
-				System.out.println(response.statusCode() + " : " + response.url());
-			} catch (IOException e) {
-				//e.printStackTrace();
-				continue;
+				GoogleGeoLatLng latLng = LatLongFinder.getLatLng(addressBuilder.toString());
+				newShop.setLatitude(latLng.getLat());
+				newShop.setLongitude(latLng.getLng());
+			} catch (Exception e) {
+				GoogleGeoLatLng latLng;
+				try {
+					latLng = LatLongFinder.getLatLng(locality);
+					newShop.setLatitude(latLng.getLat());
+					newShop.setLongitude(latLng.getLng());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
+			System.out.println(newShop);
+			shopsByLocality.add(newShop);
+		}
 
-			if (200 == response.statusCode()) {*/
-				Document shopData = Jsoup.connect(url).ignoreHttpErrors(true)
-						.userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
-						.timeout(600000000).get();
-				
-
-				StationeryShop newShop = new StationeryShop();
-
-				// Get the name of the shop
-				Elements nameElements = shopData.select("span[class=fn]");
-				for (Element element : nameElements) {
-					newShop.setName(element.ownText());
-					// System.out.println(" Name : " + element.ownText());
-				}
-
-				// Get all the contacts for a particular shop
-				Set<String> contacts = new HashSet<String>();
-				Elements telephoneNums = shopData.select("a[class=tel]");
-				for (Element telph : telephoneNums) {
-					// System.out.println(telph.ownText());
-					if (!telph.ownText().trim().isEmpty())
-						contacts.add(telph.ownText().replaceAll("\\<.*?>", "").trim());
-				}
-				StringBuilder contactBuilder = new StringBuilder();
-				for (String str : contacts)
-					contactBuilder.append(str).append(" ; ");
-				newShop.setContact(contactBuilder.toString());
-
-				// Get the address for a particular shop
-				Elements addressElements = shopData.select("span[class=jaddt]");
-				for (Element element : addressElements) {
-					newShop.setAddress(element.ownText());
-					// System.out.println(element.ownText());
-				}
-
-				// Get the rating for a particular shop
-				Elements ratingElements = shopData.select("span[class=value-titles]");
-				for (Element element : ratingElements) {
-					// System.out.println(element.ownText());
-					newShop.setRating(element.ownText());
-				}
-
-				// Get the city
-				Element city = shopData.getElementById("city");
-				System.out.println(city.val());
-				newShop.setCity(city.val());
-
-				newShop.setLocality(locality);
-
-				System.out.println(newShop);
-				shopsByLocality.add(newShop);
-			}
-		
 	}
 
+	//Delete processed locality from .txt file
 	public static void deleteLocality(String fileName, String lineToRemove) {
 		try {
 
@@ -236,7 +273,7 @@ public class JDShopCrawler {
 
 	// Write data into a csv file
 	public static void writeDataToCSV() throws IOException {
-		String csvFile = "..//JDCrawler//StationeryList_Mum.csv";
+		String csvFile = "..//JDCrawler//StationeryList_Hyd.csv";
 		FileWriter writer = new FileWriter(csvFile);
 
 		CSVUtils.writeLine(writer, Arrays.asList("Name", "Contact", "Address", "Locality", "City", "Rating"));
@@ -262,7 +299,7 @@ public class JDShopCrawler {
 
 	// This method will write data into excel file
 	public static void populateData() throws IOException, InvalidFormatException {
-		String excelFilePath = "Stationery_Mum.xls";
+		String excelFilePath = "Stationery_Hyd.xls";
 		FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 		workBook = WorkbookFactory.create(inputStream);
 		Sheet mySheet = workBook.getSheetAt(0);
@@ -279,13 +316,24 @@ public class JDShopCrawler {
 			} else {
 				row.createCell(5).setCellValue("0.0");
 			}
+			row.createCell(6).setCellValue(shop.getLatitude());
+			row.createCell(7).setCellValue(shop.getLongitude());
 		}
 
 		inputStream.close();
 
-		FileOutputStream outputStream = new FileOutputStream("Stationery_Mum.xls");
+		FileOutputStream outputStream = new FileOutputStream("Stationery_Hyd.xls");
 		workBook.write(outputStream);
 		outputStream.close();
+	}
+
+	// This method will extract the street address from webpage source
+	public static String getStreetAddress(Document shopDoc) throws IOException {
+		Element addrElement = shopDoc.getElementsByTag("script").get(1);
+		String jsonString = addrElement.data();
+		JSONObject jObject = new JSONObject(jsonString);
+		System.out.println(jObject.getJSONObject("address").getString("streetAddress"));
+		return jObject.getJSONObject("address").getString("streetAddress");
 	}
 
 	// This method will cleanup the sets
@@ -308,8 +356,13 @@ public class JDShopCrawler {
 		// prepareShopUrls(paginationUrlSetByLocality);
 		// getAllShopsInLocality("https://www.justdial.com/Mumbai/Stationery-Point-Opposite-Bharatiya-Misthan-Fort/022P1224784784C5Q6Y7_BZDET?xid=TXVtYmFpIFN0YXRpb25lcnkgU2hvcHMgTWFyaW5lIExpbmVz");
 		// deleteLocality("localities.txt", "Chembur");
-
-		readLocality("localities.txt", "Hyderabad");
 		// populateData();
+		
+		int lineCount = countLines("localities.txt");
+		//while(lineCount > 0) {
+			readLocality("localities.txt", "Hyderabad");
+		//}
+		
+		
 	}
 }
