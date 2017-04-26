@@ -86,8 +86,8 @@ public class NewJDCrawler {
 	public static void prepareShopUrls(Set<String> paginationUrlSetByLocality) throws IOException {
 		PrintWriter writer = new PrintWriter("shop_url.txt", "UTF-8");
 		for(String url : paginationUrlSetByLocality) {
-			System.setProperty("http.proxyHost", "17");
-			System.setProperty("http.proxyPort", "8080");
+		//	System.setProperty("https.proxyHost", "107.17.92.18");
+		//	System.setProperty("https.proxyPort", "8080");
 			Document shopUrlData = Jsoup.connect(url).ignoreHttpErrors(true)
 						.userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
 						.timeout(600000000).get();

@@ -1,157 +1,616 @@
-Mira Road
-Chembur
-Andheri West
-Kharghar
-Malad West
-Andheri East
-Bandra West
-Goregaon West
-Kandivali East
-Ghodbunder Road
-Navi Mumbai
-Bhandup West
-Borivali West
-Panvel
-Khar East
-Kandivali West
-Goregaon East
-90 Feet Road
-Nelson Manickam Road
-Abdul Rehman Street
-Agripada
-Airoli
-Airoli Sector 4
-Airoli Sector 8
-Altamount Road
-Ambarnath
-Ambarnath East
-Ambernath West
-Amboli
-Andheri Kurla Road
-Andheri Sahar Road
-Antop Hill
-Apollo Bunder
-August Kranti Maidan
-Babulnath Road
-Badlapur
-Ballard Estate
-Bandra East
-Belapur
-Bhandup
-Bhandup East
-Bhayandar
-Bhayandar East
-Bhayandar Wada
-Bhayandar West
-Bhayander
-Bhayander East
-Bhayander West
-Bhindi Bazaar
-Bhiwandi
-Bhiwandi
-Bhoiwada
-Bhulabhai Desai Road
-Bhuleshwar
-Bhyandar East
-Boisar
-Boisar West
-Borivali
-Borivali East
-Breach Candy
-Byculla
-Byculla East
-Byculla West
-CP Tank
-Chhatrapati Shivaji Terminus
-Carnac Bunder
-CBD Belapur
-CBD Belapur Sector 11
-Chakala
-Chandivali
-Charkop
-Charni Road
-Charni Road East
-Chembur Camp
-Chembur Colony
-Chembur East
-Chembur West
-Chinch Bandar
-Chinch Bunder
-Chinchpokli
-Chinchpokli East
-Chinchpokli West
-Chira Bazaar
-Chowpatti
-Chuna Bhatti
-Churchgate
-Colaba Causeway
-Cotton Green
-Cotton Green West
-Crawford Market
-Cuffe Parade
-Cumbala Hill
-Currey Road
-Dadabhai Naoroji Road
-Dadar East
-Dadar T T
-Dadar West
-Dahisar
-Dahisar East
-Dahisar West
-Dana Bunder
-Delisle Road
-Deonar
-Deonar East
-Dharavi
-Dhobhi Talao
-Dhobi Talao
-Dockyard
-Dombivali
-Dombivali East
-Dombivali West
-Dongri
-Elphinstone Road
-Flora Fountain
-Fort
-Gamdevi
-Ghansoli
-Ghatkopar
-Ghatkopar East
-Ghatkopar West
-Ghodbandar Road
-Girgaon
-Girgaon Chowpatty
-Girgaum
-Goregaon East
-Goregaon West
-Govandi
-Govandi East
-Govandi West
-Gowalia Tank
-Grant Road
-Grant Road East
-Grant Road West
+Gachibowli
+Shamshabad
+Kukatpally
+Mallapur
+Hi Tech City
+Habsiguda
+Jubilee Hills
+Secunderabad
+Banjara Hills
+Manikonda
+Uppal Kalan
+Ameerpet
+Shamirpet
+Sainikpuri
+Srinagar Colony
+Quthbullapur
+A C Guards
+A S Roa Nagar
+Abids Road
+Adarsh Nagar
+Adikmet
+Afzalgunj
+Agapura
+Ahmed Nagar
+Akbar Road
+Alexander Road
+Aliabad
+Alwal
+Amberpet
+Ameerpet X Road
+Anand Bagh
+Anand Nagar Colony
+Ashok Nagar
+Asif Nagar
+Attapur
+Attapur Ring Road
+Auto Nagar
+Azamabad
+Azampura Masjid
+Baber Bagh
+Bachpally
+Badichowdi
+Bagh Amberpet
+Bagh Lingampally
+Bahadurpura
+Bahadurpurpally
+Bairamalguda
+Bakaram
+Bala Nagar
+Balapur
+Balkampet
+Bandimet
+Bandlaguda
+Bank Street
+Bansilal Pet
+Bansilalpet
+Bapuji Nagar
+Barkas
+Barkatpura
+Basheerbagh
+Bazarghat
+Begum Bazar
+Bhagya Nagar Colony
+Bharat Nagar
+Bhel
+Bholakpur
+Bk Guda
+Bod Uppal
+Boggulakunta
+Bolaram
+Borabanda
+Boudha Nagar
+Bowenpally
+Boyiguda
+Chaderghat
+Chaitanyapuri
+Champapet
+Champapet X Road
+Chanchalguda
+Chanda Nagar
+Chandrayanagutta
+Chandrayangutta
+Chappel Bazar
+Chappel Road
+Char Kaman
+Charkaman
+Charlapally
+Charminar
+Chatta Bazar
+Cherlapally
+Chikkadpally
+Chilkalguda
+Chintal
+Chintal Basti
+Chintalkunta
+Chirag Ali Lane
+Chudi Bazar
+D D Colony
+Dabeerpura
+Dabeerpura North
+Dar Ul Salam
+Darul Shifa
+Defence Colony
+Devan Devdi
+Dhan Bazar
+Dharam Karan Road
+Diamond Point
+Dilshad Nagar
+Dilsukhnagar Main Road
+Distillery Road
+Domalguda
+Doodh Bowli
+Dr. A.S Rao Nagar
+Dwarkapuri Colony
+East Anand Bagh
+East Marredpally
+ECIL
+Ecil Post
+Ecil X Roads
+Edi Bazar North
+Erragadda
+Erramanzil
+Erramanzil Colony
+Esamia Bazar
+Falaknuma
+Fateh Darwaza
+Fateh Maidan
+Fateh Nagar
+Feel Khana
+Feroz Guda
+Film Nagar
+Gaddi Annaram
+Gaddi Annaram X Roads
+Gagan Mahal
+Gagan Pahad
+Gandhi Nagar
+Gandhipet
+Gandhipet Road
+General Bazar
+Ghansi Bazar
+Ghasmandi
+Ghatkesar
+Golconda
+Golconda X Roads
+Gosha Mahal
+Gowliguda
+Gowliguda Chaman
+Green Lands
 Green Park Extension
-Gulalwadi
-Haji Ali
-Horiman Circle
-Hughes Road
-Hutatma Chowk
-J B Nagar
-Jacob Circle
-Jogeshwari
-Jogeshwari East
-Jogeshwari West
-Juhu Scheme
-Juhu Tara Road
-Kalachowki
-Kala Ghoda
-Kalamboli
-Kalbadevi
-Kalina
-Kalwa
-Kalwa West
-Kalyan
-Kalyan East
-Kalyan West
-Kamothe
+Gudimalkapur
+Gudimalkapur New Po
+Gulzar House
+Gun Foundry
+Gun Rock
+Gunfoundry
+Hafiz Pet
+Hakimpet
+Hanuman Tekdi
+Haribowli
+Hasmatpet
+Hastinapuram
+Hayat Nagar
+Hill Fort
+Hill Fort Road
+Hill Street
+Himayat Nagar
+Himayat Nagar X Roads
+Himayat Sagar
+Hmt Nagar
+Hmt Road
+Humayun Nagar
+Hussaini Alam
+Hyder Basti
+Hyder Nagar
+Hyderabad Central
+Hyderguda
+Ibrahim Bagh
+Ibrahimpatnam
+Inderbagh
+Indira Park
+Jagadgirigutta
+Jagdish Market
+Jahanuma
+Jambagh
+Jamia Osmania
+Jawahar Nagar
+Jawaharlal Nehru Road
+Jeedimetla
+Kachi
+Kachiguda
+Kachiguda X Road
+Kakaguda
+Kakatiya Nagar
+Kalasiguda
+Kali Kabar
+Kali Kaman
+Kalyan Nagar
+Kamala Nagar
+Kamala Puri Colony
+Kamla Nagar
+Kanchanbagh
+Kandoji Bazar
+Kapra
+Karimnagar
+Karkhana
+Karman Ghat
+Karmanghat
+Karmanghat X Roads
+Karvan
+Karwan
+Kavadiguda
+Keshavagiri
+Khairatabad
+Kharkhana Main Road
+King Koti
+King Koti X Road
+Kishan Bagh
+Kishangunj
+Kompally
+Kondapur
+Kothaguda
+Kothapet
+Kphb
+Kphb Colony
+Krishna Nagar
+Kukatpally Colony
+Kummarguda
+Kundan Bagh
+Kushaiguda
+Kattedan
+Kavadi Guda
+L B Nagar
+L B Stadium
+L B Stadium
+Lad Bazar
+Lakdi Ka Pul
+Lal Bazar
+Lal Darwaza
+Lalapet
+Lallaguda
+Langer House
+Liberty
+Lingampalli
+Lingampally
+Lothukunta
+Lower Tank Bund Road
+M G Road
+Machili Kaman
+Madannapet
+Madhapur
+Madhura Nagar
+Madina
+Madina Guda
+Mahankali Street
+Maharaj Gunj
+Mahatma Gandhi Road
+Mahendra Hills
+Malakpet
+Malakpet Extension
+Malkajgiri
+Mallapur
+Mallapuram
+Mallepally
+Mallepally North
+Mangal Hat
+Mansurabad X Road
+Market Street
+Marredpally
+Maruthi Colony
+Maruthi Nagar
+Masab Tank
+Medchal
+Meerpet
+Mehboob Gunj
+Mehboob Nagar
+Mehdipatnam X Road
+Mettu Guda
+Minister Road
+Miralam Mandi
+Miyapur
+Mogulpura
+Moinabad
+Monda Market
+Moosabowli
+Moosapet
+Moosaram Bagh
+Moosaram Bagh X Road
+Moti Nagar
+Moula Ali
+Mozamjahi Market
+Mughalpura
+Muktargunj
+Murad Nagar
+Musheerabad
+Mylargadda
+Nacharam
+Nagarjuna Hills
+Nagarjuna Nagar
+Nagarjuna Sagar Road
+Nagole
+Nagole X Road
+Nallagutta
+Nallakunta
+Namala Gundu
+Nampally
+Nampally Station Road
+Narayanaguda
+Narayanguda
+Nayapul
+Necklace Road
+Nehru Nagar
+Neredmet
+Neredmet Cross Road
+New Bowenpally
+New Boyiguda
+New Malakpet
+New Nagole
+New Nallakunta
+New Nallakunta X Road
+New Osmangunj
+Nimboliadda
+Nizam Shahi Road
+Nizamabad
+Nizampet
+Nizampet Road
+Noor Khan Bazar
+Old Alwal
+Old Bowenpally
+Old Boyiguda
+Old Ghasmandi
+Old Jail Street
+Old Malakpet
+Old Topkhana
+Osman Shahi
+Osmangunj
+Osmania University
+Padma Rao Nagar
+Palika Bazar
+Pan Bazar
+Panjagutta
+P And T Colony
+Paradise
+Paradise Circle
+Parklane
+Parsigutta
+Patancheru
+Patel Market
+Pathargatti
+Patny
+Penderghast Road
+Picket
+Pot Market
+Pragathi Nagar
+Prakash Nagar
+Prasanth Nagar
+Purana Pul
+Purani Haveli
+Putli Bowli
+R R District
+Raj Bhavan Road
+Rajendra Nagar
+Ram Nagar
+Ram Nagar X Road
+Ramachandra Puram
+Ramakrishna Puram
+Ramakrishna Puram Road
+Ramanthapur
+Ramgopalpet
+Ramkote
+Ramnagar Gundu
+Ranga Reddy Nagar
+Ranigunj
+Rashtrapathi Road
+Rasoolpura
+Red Hills
+Regimental Bazar
+Rethi Bowli
+Rikabgunj
+Risala Bazar
+Rtc Colony
+RTC X Road
+S D Road
+S P Road
+S R Colony
+S R Nagar
+Safilguda
+Sagar Road
+Sai Nagar
+Saidabad
+Saifabad
+Saleem Nagar
+Sanath Nagar
+Santosh Nagar
+Saroor Nagar
+Sebastian Road
+Secretariat
+Seetharambagh
+Serilingampally
+Shah Ali Banda
+Shahpur Nagar
+Shaikpet
+Shahpur Nagar
+Shamshergunj
+Shanker Bagh
+Shanker Mutt
+Shanti Nagar
+Shivam Road
+Shivarampally
+Siddarth Nagar
+Siddiamber Bazar
+Sikh Road
+Sikh Village
+Sikh Village Road
+Sindhi Colony
+Sitaphal Mandi
+Somajiguda
+Somajiguda Circle
+Sri Krishna Nagar
+Sri Srinivas Colony
+Srinagar
+Srinagar Colony Main Road
+Srinivasa Colony
+Srinivasa Nagar
+Srinivasa Nagar Colony
+St. Johns Road
+St. Marys Road
+Subash Road
+Sultan Bazar
+Surya Nagar Colony
+Shapur Nagar
+Shivaji Nagar
+Tad Bund
+Tad Bund X Road
+Talab Katta
+Talabkatta
+Tank Bund
+Tank Bund Road
+Tar Bund
+Tar Bund X Road
+Taranagar
+Tarnaka
+Tilak Nagar
+Tilak Road
+Tobacco Bazar
+Toli Chowki
+Topkhana
+Trimulgherry
+Trimulgherry X Road
+Troop Bazar
+Uppal
+Uppuguda
+Vanasthalipuram
+Vasavi Nagar
+Vengal Rao Nagar
+Venkatapuram
+Vidyanagar
+Vijay Nagar Colony
+Vikas Nagar
+Vikrampuri
+Vikrampuri Colony
+Vinayak Rao Nagar
+Vithalwadi
+Warasiguda
+West Marredpally
+Yakutpura
+Yapral
+Yellareddy Guda
+Yellareddyguda
+Yousuf Bazar
+Yousufguda
+Zamistanpur
+Tirumalgherry
+Hyderabad Airport 1
+Hyder Shah Kote
+Hyderabad GPO
+Hyderabad Jubilee HO
+Hyderabad Public School
+I.E.Nacharam
+I.M.Colony
+Ibrahim Bagh Lines
+Ie Moulali
+IICT
+Jaggamguda
+Jama I Osmania
+Jillellaguda
+Karwan Sahu
+Kachivani Singaram
+Kattedan Ie So
+Keesara
+Keesaragutta
+Keshogiri SO
+Khairatabad HO
+Kingsway
+Kismatpur
+Kolthur
+Korremal
+Kulsumpura
+Kyasaram
+Lalgadi Malakpet
+Mehdipatnam
+Old City
+Pratap Singaram
+Qazipura
+RC Imarat So
+Rahmath Nagar
+Rail Nilayam
+Raj Bhavan
+Rajbolaram
+Ag College
+AG Office
+A.Gs Staff Quarters
+Amber Nagar
+Anand Nagar
+Ananthagiri
+Andhra Mahila Sabha
+Aperl
+APHB Colony Moulali
+Atvelli
+Badangpet
+Begumpet
+Begumpet Police Lines
+Bharath Nagar Colony
+Boduppal
+Bogaram
+Central Police Lines
+Chanchalguda Colony
+Chandulal Baradari
+CRP Camp
+Cyberabad
+Dargah Hussain Shah Wali
+Darushifa
+Dattatreya Colony
+Dhoolpet
+Fathenagar Colony
+Gajularamaram
+Gandhi Bhavan
+Girmapur
+Golconda Chowrastha
+Yadgarpally
+Vidhan Sabha
+Vishali Nagar
+Vaidehi Nagar
+Thumkunta
+Thimmaipally
+Swaraj Nagar
+Sardar Vallabhbhai Patel National Police Academy
+Survey Of India
+Suraram
+Sultan Shahi
+Kachiguda Station
+State Bank Of Hyderabad
+Sripuram Colony
+Srinivasapuram
+South Banjara Hills
+Snehapuri Colony
+Sitaphalmandi
+Shyam Nagar
+Turkapalliyadaram
+Tagarikanaka
+Ankireddypalli
+Ankushapur
+Annojiguda
+Cherial
+Vikarabad
+Gowdavalli
+Hanumanpet
+Hassan Nagar
+Himayat Nagar
+GSI (SR) Bandlaguda
+Abids
+Amberpet
+Dilsukhnagar
+Sanjeeva Reddy Nagar
+HUDA Residential Complex
+Hindustan Cables Ltd
+DK Road
+High Court SO
+LIC Division
+Langer House
+Malakpet Colony
+Mamidipalli
+Mangalhat
+Mansoorabad
+Moghalpura
+Rampally
+Nanakramguda
+Osman Nagar
+Padmarao Nagar
+Padmavathi Nagar
+Pahadi Shareef
+Koti
+Pirzadi Guda
+Nuthankal
+P AND T Colony S O
+Old MLA Quarters
+New MLA Quarters
+NGRI
+Rein Bazar
+Saidabad Colony
+Sanath Nagar Colony
+Seetharampet
+Santosh Nagar Colony
+Sakkubai Nagar
+Napier Lines
+Osmania General Hospital
+Hyderabad Airport Limited
+Ramakrishna Math
+Parishram Bhavan
+Peddalaxmapur
+Ram Koti
+Rampallidiara
+Rangareddy District Court
+Ravalkole
+Sahifa S O
+Sanath Nagar IE
+Hindi Bhawan

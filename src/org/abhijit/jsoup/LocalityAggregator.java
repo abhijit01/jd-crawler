@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 public class LocalityAggregator {
 
 	public enum City {
-		Mumbai
+		Hyderabad
 	};
 
 	public static void getAllLocalities(String city) throws IOException {
