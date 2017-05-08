@@ -1,7 +1,5 @@
 package org.abhijit.jsoup;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,7 @@ public class ExcelUtility {
 		createWorkBook();
 	}
 
-	public static void createWorkBook() throws IOException {
+	public static Workbook createWorkBook() throws IOException {
 
 		workbook = new XSSFWorkbook();
 		List<String> shopColList = new ArrayList<String>();
@@ -30,10 +28,11 @@ public class ExcelUtility {
 		shopColList.add("Contact");
 		shopColList.add("Address");
 		shopColList.add("Locality");
+		shopColList.add("Street Address");
 		shopColList.add("City");
 		shopColList.add("Rating");
-		shopColList.add("Latitude");
-		shopColList.add("Longitude");
+		//shopColList.add("Latitude");
+		//shopColList.add("Longitude");
 
 		Sheet sheet = createSheet("StationeryShop", shopColList);
 		sheet.setColumnWidth(0, 35 * 256);
@@ -42,20 +41,11 @@ public class ExcelUtility {
 		sheet.setColumnWidth(3, 10 * 256);
 		sheet.setColumnWidth(4, 10 * 256);
 		sheet.setColumnWidth(5, 10 * 256);
-		sheet.setColumnWidth(6, 15 * 256);
-		sheet.setColumnWidth(7, 15 * 256);
+		sheet.setColumnWidth(6, 10 * 256);
+		//sheet.setColumnWidth(6, 15 * 256);
+		//sheet.setColumnWidth(7, 15 * 256);
 		
-		File f = new File("Stationery_Hyd.xls");
-		FileOutputStream out = null;
-		try {
-			out = new FileOutputStream(f);
-			workbook.write(out);
-			System.out.println("Wrote " + f.getCanonicalPath());
-		} finally {
-			if (out != null) {
-				out.close();
-			}
-		}
+		return workbook;
 	}
 
 	private static Sheet createSheet(String sheetName, List<String> columns) {

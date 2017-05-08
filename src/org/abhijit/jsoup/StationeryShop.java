@@ -14,9 +14,10 @@ public class StationeryShop {
     
     private String rating ;
     
-    private String latitude;
-    
-    private String longitude;
+    private String streetAdress;
+//    private String latitude;
+//    
+//    private String longitude;
 
 	public String getName() {
 		return name;
@@ -66,25 +67,32 @@ public class StationeryShop {
 		this.rating = rating;
 	}
     
-    public String getLatitude() {
-		return latitude;
+//    public String getLatitude() {
+//		return latitude;
+//	}
+//
+//	public void setLatitude(String latitude) {
+//		this.latitude = latitude;
+//	}
+//
+//	public String getLongitude() {
+//		return longitude;
+//	}
+//
+//	public void setLongitude(String longitude) {
+//		this.longitude = longitude;
+//	}
+
+	public String getStreetAdress() {
+		return streetAdress;
 	}
 
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setStreetAdress(String streetAdress) {
+		this.streetAdress = streetAdress;
 	}
 
 	public String toString() {
     	return "Stationery Shop :  [Name : " + name + "\nContact : " + contact  
-    			+ "\nAddress : " + address + "\nCity : " + city + "\nRating : " + rating 
-    			+ "\nLatitude : " + latitude + "\nLongitude : " + longitude + "]";
+    			+ "\nAddress : " + address + "\nCity : " + city + "\nRating : " + rating + "]";
     }
 }

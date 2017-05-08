@@ -18,7 +18,8 @@ public class LocalityAggregator {
 	};
 
 	public static void getAllLocalities(String city) throws IOException {
-		PrintWriter writer = new PrintWriter("localities.txt", "UTF-8");
+		String fileName = "localities_"+ LocalityAggregator.getCity() +".txt";
+		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 		StringBuilder localityUrl = new StringBuilder("http://www.propertykhazana.com/localities/");
 		localityUrl.append(city.toLowerCase());
 		Document locDoc = Jsoup.connect(localityUrl.toString()).ignoreHttpErrors(true)
@@ -37,8 +38,14 @@ public class LocalityAggregator {
 		}
 		writer.close();
 	}
+	
+	public static String getCity() {
+		//System.out.println(City.values()[0].toString());
+		return City.values()[0].toString();
+	}
 
 	public static void main(String[] args) throws IOException {
+		getCity();
 		for (City city : City.values()) {
 			getAllLocalities(city.toString());
 			System.out.println("Fetched all the localities for " + city);
