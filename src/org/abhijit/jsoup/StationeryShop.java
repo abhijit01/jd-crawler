@@ -4,20 +4,21 @@ public class StationeryShop {
 
 	private String name;
 
-    private String contact;
-    
-    private String address;
-    
-    private String city ;
-    
-    private String locality ;
-    
-    private String rating ;
-    
-    private String streetAdress;
-//    private String latitude;
-//    
-//    private String longitude;
+	private String contact;
+
+	private String address;
+
+	private String locality;
+
+	private String streetAdress;
+
+	private String city;
+
+	private String rating;
+
+	private String latitude;
+
+	private String longitude;
 
 	public String getName() {
 		return name;
@@ -43,14 +44,6 @@ public class StationeryShop {
 		this.address = address;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public String getLocality() {
 		return locality;
 	}
@@ -58,30 +51,6 @@ public class StationeryShop {
 	public void setLocality(String locality) {
 		this.locality = locality;
 	}
-
-	public String getRating() {
-		return rating;
-	}
-
-	public void setRating(String rating) {
-		this.rating = rating;
-	}
-    
-//    public String getLatitude() {
-//		return latitude;
-//	}
-//
-//	public void setLatitude(String latitude) {
-//		this.latitude = latitude;
-//	}
-//
-//	public String getLongitude() {
-//		return longitude;
-//	}
-//
-//	public void setLongitude(String longitude) {
-//		this.longitude = longitude;
-//	}
 
 	public String getStreetAdress() {
 		return streetAdress;
@@ -91,8 +60,40 @@ public class StationeryShop {
 		this.streetAdress = streetAdress;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
 	public String toString() {
-    	return "Stationery Shop :  [Name : " + name + "\nContact : " + contact  
-    			+ "\nAddress : " + address + "\nCity : " + city + "\nRating : " + rating + "]";
-    }
+		return "Stationery Shop :  [Name : " + name + "\nContact : " + contact + "\nAddress : " + address + "\nCity : "
+				+ city + "\nRating : " + rating + "]";
+	}
 }
