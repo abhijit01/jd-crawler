@@ -163,8 +163,8 @@ public class JDShopCrawler {
 	public static void prepareShopUrls(Set<String> paginationUrlSetByLocality) {
 		try{		
 			for (String url : paginationUrlSetByLocality) {
-				System.setProperty("https.proxyHost", "107.18.134.122");
-				System.setProperty("https.proxyPort", "8080");
+				//System.setProperty("https.proxyHost", "107.18.134.122");
+				//System.setProperty("https.proxyPort", "8080");
 				// Proxy proxy = new Proxy(Proxy.Type.HTTP, new
 				// InetSocketAddress("207.99.118.74", 8080));
 				// Thread.sleep(5000);
@@ -228,8 +228,8 @@ public class JDShopCrawler {
 		for (String url : shopUrlSetByLocality) {
 			// Thread.sleep(5000);
 			// Run this function using different proxies
-			System.setProperty("https.proxyHost", "107.18.134.122");
-			System.setProperty("https.proxyPort", "8080");
+			//System.setProperty("https.proxyHost", "107.18.134.122");
+			//System.setProperty("https.proxyPort", "8080");
 			/*Set<String> proxySet = ConnectionUtility.getProxyList();
 			String randomIP = getRandomIP(proxySet);
 			System.setProperty("https.proxyHost", randomIP);

@@ -78,7 +78,9 @@ public class CsvParserLatLng {
 				shop.setLatitude(latLng.getLat());
 				shop.setLongitude(latLng.getLng());
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				System.out.println("Google geocode api is blocked for further data fetching...");
+				System.exit(0);
+				//ex.printStackTrace();
 			}
 		}
 		return shop;
