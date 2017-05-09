@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-import org.supercsv.io.CsvBeanWriter;
-import org.supercsv.prefs.CsvPreference;
-
 public class FileUtility {
 
 	//This will create a excel file if doesn't exist
