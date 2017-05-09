@@ -293,7 +293,7 @@ public class JDShopCrawler {
 
 				addressBuilder.append(getStreetAddress(shopData));
 				
-				newShop.setStreetAdress(addressBuilder.toString());
+				newShop.setStreetAddress(addressBuilder.toString());
 				
 //				try {
 //					GoogleGeoLatLng latLng = LatLongFinder.getLatLng(addressBuilder.toString());
@@ -377,7 +377,7 @@ public class JDShopCrawler {
 			list.add(appendDQ(shop.getContact()));
 			list.add(appendDQ(shop.getAddress()));
 			list.add(appendDQ(shop.getLocality()));
-			list.add(appendDQ(shop.getStreetAdress()));
+			list.add(appendDQ(shop.getStreetAddress()));
 			list.add(appendDQ(shop.getCity()));
 			if (shop.getRating() != null) {
 				list.add(appendDQ(shop.getRating()));
@@ -408,7 +408,7 @@ public class JDShopCrawler {
 			row.createCell(1).setCellValue(shop.getContact());
 			row.createCell(2).setCellValue(shop.getAddress());
 			row.createCell(3).setCellValue(shop.getLocality());
-			row.createCell(4).setCellValue(shop.getStreetAdress());
+			row.createCell(4).setCellValue(shop.getStreetAddress());
 			row.createCell(5).setCellValue(shop.getCity());
 			if (shop.getRating() != null) {
 				row.createCell(6).setCellValue(shop.getRating());
@@ -483,6 +483,7 @@ public class JDShopCrawler {
 		int lineCount = countLines(fileName);
 		while (lineCount > 0) {
 			readLocality(fileName, city);
+			lineCount--;
 		}
 
 	}

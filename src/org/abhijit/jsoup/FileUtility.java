@@ -7,6 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 public class FileUtility {
 
@@ -67,6 +71,26 @@ public class FileUtility {
 		} else {
 			System.out.println(fileName + " is ready for processing.");
 		}
+	}
+	
+	public static void checkForCsvFile_LatLng() throws IOException{
+		String fileName = "Stationery_"+ LocalityAggregator.getCity()+"_out.csv";
+		File f = new File(fileName);
+		if(!f.exists()) {
+			FileWriter writer = new FileWriter(fileName);
+			CSVUtils.writeLine(writer,
+					Arrays.asList(appendDQ("Name"), appendDQ("Contact"), appendDQ("Address"), appendDQ("Locality"),
+							appendDQ("Street Address"), appendDQ("City"), appendDQ("Rating"), appendDQ("Latitude"),
+							appendDQ("Longitude")));
+			System.out.println("Wrote " + f.getCanonicalPath());
+			writer.close();
+		} else {
+			System.out.println(fileName + " is ready for processing.");
+		}
+	}
+	
+	private static String appendDQ(String str) {
+		return "\"" + str + "\"";
 	}
 	
 	public static boolean checkEmptyFile(String fileName) throws IOException {

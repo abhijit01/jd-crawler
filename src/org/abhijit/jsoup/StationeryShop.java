@@ -10,7 +10,7 @@ public class StationeryShop {
 
 	private String locality;
 
-	private String streetAdress;
+	private String streetAddress;
 
 	private String city;
 
@@ -52,12 +52,12 @@ public class StationeryShop {
 		this.locality = locality;
 	}
 
-	public String getStreetAdress() {
-		return streetAdress;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
-	public void setStreetAdress(String streetAdress) {
-		this.streetAdress = streetAdress;
+	public void setStreetAddress(String streetAdress) {
+		this.streetAddress = streetAdress;
 	}
 
 	public String getCity() {
