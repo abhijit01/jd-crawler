@@ -12,6 +12,11 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class CsvParserLatLng {
 
@@ -41,12 +46,12 @@ public class CsvParserLatLng {
 				}
 			}
 			// in.close();
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void processRecord(String line) throws IOException {
+	public static void processRecord(String line) throws IOException, InterruptedException {
 		//String fileName = "abc_" + LocalityAggregator.getCity() + ".csv";
 		reader.close();
 		deleteRecord(inFile, line);
@@ -54,7 +59,7 @@ public class CsvParserLatLng {
 		writeToCsvFile(outFile, shop);
 	}
 
-	public static StationeryShop prepareShopData(String nextLine) throws IOException {
+	public static StationeryShop prepareShopData(String nextLine) throws InterruptedException {
 		StationeryShop shop = new StationeryShop();
 		if (nextLine != null) {
 			String[] parts = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
@@ -78,12 +83,26 @@ public class CsvParserLatLng {
 				shop.setLatitude(latLng.getLat());
 				shop.setLongitude(latLng.getLng());
 			} catch (Exception ex) {
+				playSound("Alien_Siren.wav");
+				TimeUnit.MINUTES.sleep(2);
 				System.out.println("Google geocode api is blocked for further data fetching...");
 				System.exit(0);
 				//ex.printStackTrace();
 			}
 		}
 		return shop;
+	}
+	
+	public static void playSound(String fileName) {
+		try {
+	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(fileName).getAbsoluteFile());
+	        Clip clip = AudioSystem.getClip();
+	        clip.open(audioInputStream);
+	        clip.start();
+	    } catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
 	}
 
 	public static void writeToCsvFile(String outFile, StationeryShop shop) throws IOException {

@@ -20,8 +20,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -441,6 +446,19 @@ public class JDShopCrawler {
 		shopsUrlSetByLocality = new HashSet<String>();
 		shopsByLocality = new HashSet<StationeryShop>();
 	}
+	
+	public static void playSound(String fileName) {
+		try {
+	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(fileName).getAbsoluteFile());
+	        Clip clip = AudioSystem.getClip();
+	        clip.open(audioInputStream);
+	        clip.start();
+	        clip.loop(5);
+	    } catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
+	}
 
 	// Select a random IP from the list
 //	private static String getRandomIP(Set<String> proxySet) {
@@ -461,7 +479,7 @@ public class JDShopCrawler {
 //		}
 //	}
 
-	public static void main(String[] args) throws IOException, InterruptedException, InvalidFormatException {
+	public static void main(String[] args) throws InterruptedException {
 		// readLocality("localities.txt");
 		// prepareMainUrlForLocality(primaryUrl, "Mumbai", "Marine Lines");
 		// preparePaginationUrlsForLocality("https://www.justdial.com/Mumbai/Stationery-Shops-in-Marine-Lines/nct-10453443/page-");
@@ -477,13 +495,20 @@ public class JDShopCrawler {
 		String city = LocalityAggregator.getCity();
 		String fileName = "localities_"+ city +".txt";
 		String outFile ="Stationery_"+ city +".csv";
-		if(FileUtility.checkEmptyFile(fileName) && FileUtility.checkEmptyFile(outFile)) {
-			LocalityAggregator.getAllLocalities(city.toString());
-		}
-		int lineCount = countLines(fileName);
-		while (lineCount > 0) {
-			readLocality(fileName, city);
-			lineCount--;
+		try {
+			
+			if(FileUtility.checkEmptyFile(fileName) && FileUtility.checkEmptyFile(outFile)) {
+				LocalityAggregator.getAllLocalities(city.toString());
+			}
+			int lineCount = countLines(fileName);
+			while (lineCount > 0) {
+				readLocality(fileName, city);
+				lineCount--;
+			}
+		}catch(IOException | InvalidFormatException | InterruptedException ex) {
+			playSound("Alien_Siren.wav");
+			TimeUnit.MINUTES.sleep(2);
+			ex.printStackTrace();
 		}
 
 	}
