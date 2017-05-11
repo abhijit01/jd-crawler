@@ -23,36 +23,38 @@ public class CsvParserLatLng {
 	private static BufferedReader reader;
 	private static final String inFile = "Stationery_" + LocalityAggregator.getCity() + ".csv";
 	private static final String outFile = "Stationery_" + LocalityAggregator.getCity() + "_out.csv";
+	private static final String audioFile = "Alien_Siren.wav";
 
 	static {
 		try {
 			FileUtility.checkForCsvFile_LatLng();
-			if(!new File(inFile).exists()) {
+			if (!new File(inFile).exists()) {
 				System.err.println(inFile + " is not present in the system. Please try again...");
 			}
 		} catch (IOException e) {
+			playSound(audioFile);
 			e.printStackTrace();
+			try {
+				TimeUnit.MINUTES.sleep(2);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
-	public static void readDataFromCsv(String fileName) throws IOException {
-		try {
-			reader = new BufferedReader(new FileReader(fileName));
-			reader.readLine();
-			String record = reader.readLine();
-			if (record != null) {
-				if (!record.trim().isEmpty()) {
-					processRecord(record);
-				}
+	public static void readDataFromCsv(String fileName) throws IOException, InterruptedException {
+		reader = new BufferedReader(new FileReader(fileName));
+		reader.readLine();
+		String record = reader.readLine();
+		if (record != null) {
+			if (!record.trim().isEmpty()) {
+				processRecord(record);
 			}
-			// in.close();
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
 		}
 	}
 
 	public static void processRecord(String line) throws IOException, InterruptedException {
-		//String fileName = "abc_" + LocalityAggregator.getCity() + ".csv";
+		// String fileName = "abc_" + LocalityAggregator.getCity() + ".csv";
 		reader.close();
 		deleteRecord(inFile, line);
 		StationeryShop shop = prepareShopData(line);
@@ -71,7 +73,7 @@ public class CsvParserLatLng {
 			shop.setCity(parts[5]);
 			shop.setRating(parts[6]);
 		}
-		
+
 		try {
 			GoogleGeoLatLng latLng = LatLongFinder.getLatLng(shop.getStreetAddress());
 			shop.setLatitude(latLng.getLat());
@@ -87,32 +89,34 @@ public class CsvParserLatLng {
 				TimeUnit.MINUTES.sleep(2);
 				System.out.println("Google geocode api is blocked for further data fetching...");
 				System.exit(0);
-				//ex.printStackTrace();
+				// ex.printStackTrace();
 			}
 		}
 		return shop;
 	}
-	
+
 	public static void playSound(String fileName) {
 		try {
-	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(fileName).getAbsoluteFile());
-	        Clip clip = AudioSystem.getClip();
-	        clip.open(audioInputStream);
-	        clip.start();
-	    } catch(Exception ex) {
-	        System.out.println("Error with playing sound.");
-	        ex.printStackTrace();
-	    }
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(fileName).getAbsoluteFile());
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (Exception ex) {
+			System.out.println("Error with playing sound.");
+			ex.printStackTrace();
+		}
 	}
 
 	public static void writeToCsvFile(String outFile, StationeryShop shop) throws IOException {
 		// String fileName = "Stationery_"+ LocalityAggregator.getCity()+".csv";
 		FileWriter writer = new FileWriter(outFile, true);
 
-//		CSVUtils.writeLine(writer,
-//				Arrays.asList(appendDQ("Name"), appendDQ("Contact"), appendDQ("Address"), appendDQ("Locality"),
-//						appendDQ("Street Address"), appendDQ("City"), appendDQ("Rating"), appendDQ("Latitude"),
-//						appendDQ("Longitude")));
+		// CSVUtils.writeLine(writer,
+		// Arrays.asList(appendDQ("Name"), appendDQ("Contact"),
+		// appendDQ("Address"), appendDQ("Locality"),
+		// appendDQ("Street Address"), appendDQ("City"), appendDQ("Rating"),
+		// appendDQ("Latitude"),
+		// appendDQ("Longitude")));
 
 		List<String> list = new ArrayList<String>();
 		list.add(shop.getName());
@@ -128,7 +132,7 @@ public class CsvParserLatLng {
 		}
 		list.add(appendDQ(shop.getLatitude()));
 		list.add(appendDQ(shop.getLongitude()));
-		
+
 		CSVUtils.writeLine(writer, list);
 
 		writer.flush();
@@ -139,50 +143,43 @@ public class CsvParserLatLng {
 		return "\"" + str + "\"";
 	}
 
-	public static void deleteRecord(String fileName, String lineToRemove) {
-		try {
-			File inFile = new File(fileName);
+	public static void deleteRecord(String fileName, String lineToRemove) throws IOException {
+		File inFile = new File(fileName);
 
-			if (!inFile.isFile()) {
-				System.out.println("Parameter is not an existing file");
-				return;
-			}
-
-			// Construct the new file that will later be renamed to the original
-			// filename.
-			File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
-
-			BufferedReader br = new BufferedReader(new FileReader(fileName));
-			PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-
-			String line = null;
-
-			// Read from the original file and write to the new
-			// unless content matches data to be removed.
-			while ((line = br.readLine()) != null) {
-				if (!line.trim().equals(lineToRemove)) {
-					pw.println(line);
-					pw.flush();
-				}
-			}
-			pw.close();
-			br.close();
-
-			// Delete the original file
-			if (!inFile.delete()) {
-				System.out.println("Could not delete file");
-				return;
-			}
-
-			// Rename the new file to the filename the original file had.
-			if (!tempFile.renameTo(inFile))
-				System.out.println("Could not rename file");
-
-		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
-		} catch (IOException ex) {
-			ex.printStackTrace();
+		if (!inFile.isFile()) {
+			System.out.println("Parameter is not an existing file");
+			return;
 		}
+
+		// Construct the new file that will later be renamed to the original
+		// filename.
+		File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
+
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+		String line = null;
+
+		// Read from the original file and write to the new
+		// unless content matches data to be removed.
+		while ((line = br.readLine()) != null) {
+			if (!line.trim().equals(lineToRemove)) {
+				pw.println(line);
+				pw.flush();
+			}
+		}
+		pw.close();
+		br.close();
+
+		// Delete the original file
+		if (!inFile.delete()) {
+			System.out.println("Could not delete file");
+			return;
+		}
+
+		// Rename the new file to the filename the original file had.
+		if (!tempFile.renameTo(inFile))
+			System.out.println("Could not rename file");
 	}
 
 	// Read the no of lines in a .txt file
@@ -207,14 +204,20 @@ public class CsvParserLatLng {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		//int lineCount = countLines(inFile);
-		int lineCount = 2500;
-		//System.out.println(lineCount);
-		while(lineCount > 0) {
-			readDataFromCsv(inFile);
-			lineCount--;
+	public static void main(String[] args) throws InterruptedException {
+		try {
+			// int lineCount = countLines(inFile);
+			int lineCount = 2500;
+			// System.out.println(lineCount);
+			while (lineCount > 0) {
+				readDataFromCsv(inFile);
+				lineCount--;
+			}
+			System.out.println(inFile + " is successfully processed.");
+		} catch (Throwable e) {
+			e.printStackTrace();
+			playSound(audioFile);
+			TimeUnit.MINUTES.sleep(2);
 		}
-		System.out.println(inFile + " is successfully processed.");
 	}
 }
