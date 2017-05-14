@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -79,17 +78,24 @@ public class CsvParserLatLng {
 			shop.setLatitude(latLng.getLat());
 			shop.setLongitude(latLng.getLng());
 		} catch (Exception e) {
+			StringBuilder addressBuilder = new StringBuilder();
+			addressBuilder.append(shop.getName().replaceAll("^\"|\"$", "")).append(",").append(shop.getCity().replaceAll("^\"|\"$", ""));
 			GoogleGeoLatLng latLng;
 			try {
-				latLng = LatLongFinder.getLatLng(shop.getLocality());
+				latLng = LatLongFinder.getLatLng(addressBuilder.toString());
 				shop.setLatitude(latLng.getLat());
 				shop.setLongitude(latLng.getLng());
 			} catch (Exception ex) {
-				playSound("Alien_Siren.wav");
-				TimeUnit.MINUTES.sleep(2);
-				System.out.println("Google geocode api is blocked for further data fetching...");
-				System.exit(0);
-				// ex.printStackTrace();
+				if(ex.getMessage().contains("You have exceeded your daily request quota for this API.")) {
+					playSound("Alien_Siren.wav");
+					TimeUnit.MINUTES.sleep(2);
+					System.out.println("Google geocode api is blocked for further data fetching...");
+					ex.printStackTrace();
+					System.exit(0);
+				} else {
+					shop.setLatitude("");
+					shop.setLongitude("");
+				}
 			}
 		}
 		return shop;
